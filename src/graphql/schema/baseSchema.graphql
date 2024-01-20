@@ -1,0 +1,10 @@
+enum TYPE {
+    Percentage
+    Value
+}
+
+input List {
+    page: Int
+    limit: Int
+    searchKey: String
+}

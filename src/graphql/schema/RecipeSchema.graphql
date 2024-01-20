@@ -1,0 +1,57 @@
+#import './baseSchema.graphql'
+
+type Recipe {
+    productId: ID!
+    ingredients: [Ingredient!]!
+}
+
+type Ingredient {
+    rawMaterialId: ID!
+    qty: Float!
+    waste: Waste!
+}
+
+type Waste {
+    valueType: String!
+    value: Float!
+}
+
+input AddRecipeInput {
+    productId: ID!
+    ingredients: [IngredientInput!]!
+}
+
+input IngredientInput {
+    rawMaterialId: ID!
+    qty: Float!
+    waste: WasteInput!
+}
+
+input UpdateRecipeInput {
+    id: ID!
+    productId: ID
+    ingredients: [IngredientInput!]
+}
+
+input WasteInput {
+    valueType: String!
+    value: Float!
+}
+
+type ListResponse {
+    data: [Recipe!]
+    totalItems: Int!
+    totalPages: Int!
+    currentPage: Int!
+}
+
+type Query {
+    list(params: List): ListResponse
+    recipe(id: ID!): Recipe
+}
+
+type Mutation {
+    createRecipe(data: AddRecipeInput!): Recipe
+    updateRecipe(params: UpdateRecipeInput!): Boolean
+    deleteRecipe(id: ID!): Boolean
+}

@@ -1,0 +1,54 @@
+#import "./baseSchema.graphql"
+
+type Coupon {
+  _id: ID
+  type: TYPE
+  discount: Float
+  code: String
+  title: String
+  duration: String
+  description: String
+  min_value: Int
+  qty: Int
+}
+
+input AddCoupon {
+  type: TYPE!
+  discount: Float!
+  code: String!
+  title: String!
+  duration: String!
+  description: String!
+  min_value: Int!
+  qty: Int!
+}
+
+input UpdateCoupon {
+    id: ID!
+    type: TYPE
+    discount: Float
+    code: String
+    title: String
+    duration: String
+    description: String
+    min_value: Int
+    qty: Int
+}
+
+type CouponList {
+  data: [Coupon]
+  totalItems: Int
+  totalPages: Int
+  currentPage: Int
+}
+
+type Query {
+  coupons(params: List): CouponList
+  coupon(id: ID!): Coupon
+}
+
+type Mutation {
+  createCoupon(coupon: AddCoupon): Boolean
+  updateCoupon(coupon: UpdateCoupon): Coupon
+  deleteCoupon(id: ID!): Boolean
+}
